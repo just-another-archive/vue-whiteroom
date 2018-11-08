@@ -5,8 +5,8 @@
 */
 
 export const convert = definition => {
-  if (!!definition.dataset)
-    return 'dataset'
+  if (!!definition.enum)
+    return 'enum'
 
   switch(definition.type) {
     case Number:
