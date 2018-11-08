@@ -18,7 +18,7 @@
         @input="value => set(prop.name, value)"
         v-bind="prop.properties" />
     </agent>
-    <h3 v-if="filtered_triggers.length">triggers</h3>
+    <h3 v-if="filtered_triggers.length">methods</h3>
     <agent :key="`trigger_${i}`" v-for="(trigger, i) in filtered_triggers"
            :name="trigger.name" :description="trigger.description">
       <trigger :trigger="trigger.name" />

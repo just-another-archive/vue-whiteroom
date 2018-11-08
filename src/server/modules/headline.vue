@@ -39,7 +39,7 @@ export default {
   },
 
   data() { return {
-    toggle: true,
+    toggle: false,
   }; },
 }
 </script>
