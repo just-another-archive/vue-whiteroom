@@ -1,2 +1,17 @@
 #!/usr/bin/env node
-require('../index')
+const { existsSync } = require('fs')
+const { resolve } = require('path')
+
+// convenient argv
+let options = require('minimist')(process.argv.slice(2))
+
+// ignore argv if config file is here or provided
+if (existsSync(resolve(process.env.PWD, '.whiteroomrc')))
+  options = require(resolve(process.env.PWD, '.whiteroomrc'))
+else if (!!options.config)
+  options = require(resolve(process.env.PWD, options.config))
+
+const { entrypoint, host, port } = options
+
+require('../index')({ entrypoint, host, port })
+

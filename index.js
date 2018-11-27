@@ -1,15 +1,28 @@
-const config = require('./config')
-
+const { resolve } = require('path')
 const Webpack = require('webpack')
 const Server = require('webpack-dev-server')
-Server.addDevServerEntrypoints(config.webpack, config.webpack.devServer)
 
-const compiler = Webpack(config.webpack);
+module.exports = ({ entrypoint, host, port }) => {
+  const config = require('./webpack.config')
 
-const server = new Server(compiler, config.webpack.devServer);
+  if (!!entrypoint)
+    config.entry.experiments = resolve(process.env.PWD, entrypoint)
 
-server.listen(
-  config.webpack.devServer.port, config.webpack.devServer.host,
-  () => {
-  console.log(`Starting server on http://${config.webpack.devServer.host}:${config.webpack.devServer.port}`);
-});
+  if (!!host)
+    config.devServer.host = host
+
+  if (!!port)
+    config.devServer.port = parseInt(port)
+
+  Server.addDevServerEntrypoints(config, config.devServer)
+
+  const compiler = Webpack(config);
+
+  const server = new Server(compiler, config.devServer);
+
+  server.listen(
+    config.devServer.port, config.devServer.host,
+    () => {
+    console.log(`Starting server on http://${config.devServer.host}:${config.devServer.port}`);
+  });
+}
