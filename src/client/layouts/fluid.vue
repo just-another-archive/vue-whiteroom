@@ -25,12 +25,12 @@ export default {
 <style lang="stylus">
 .fluidlayout
   display grid
-  width calc(100vw - 20px)
-  height calc(100vh - 20px)
-  margin 10px
+  width calc(100vw - 2rem)
+  height calc(100vh - 2rem)
+  margin 1rem
 
-  grid-template-columns 10px min-content 20px auto 10px
-  grid-template-rows 10px min-content 20px auto 10px
+  grid-template-columns 1rem min-content 2rem auto 1rem
+  grid-template-rows 1rem min-content 2rem auto 1rem
 
   $style = 1px dashed #888
 
