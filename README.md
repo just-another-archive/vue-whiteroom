@@ -17,7 +17,7 @@
 - [x] multiple _layouts_
 - [x] multiple _devices_
 - [x] extensible _devices_ and _layouts_ declaration
-- [ ] multi level navigation
+- [x] multi level navigation
 
 ### why not reuse?
 
@@ -46,7 +46,7 @@ inspect(Demo1)
 
 ### `vue-whiteroom/api` functions
 
-- `inspect(VueObject, { path = VueObject.__file__, name = path, description = null })` : this function registers a new object to be inspected. If you come from other projects such as vue-play or storybook, it's almost similar as `.add(() => VueObject)`
+- `inspect(VueObject, { path = VueObject.__file__, group = '', name = path, description = null })` : this function registers a new object to be inspected. If you come from other projects such as vue-play or storybook, it's almost similar as `.add(() => VueObject)`. The "group" property provides a simple way to add foldable navigation by categories.
 
 - `device(name, css)` : this function adds the `name` device in the devices definition. `css` must contain at least `width` and `height` as normal css declaration.
 
