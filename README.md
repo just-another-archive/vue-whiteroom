@@ -65,6 +65,165 @@ inspect(Demo1)
 
 - `wrap(VueComponent)` : this function will return an auto-generated Vue file to handle your component. It will pass props along (but can't really guess for enums) ; injections will be passed, events will be _all_ listened to, and public functions (not starting with `_` or `$`) will be automatically registered as trigger.
 
+### configure my experiment
+
+A simple experiment should be a Vue file rendering at least an element.
+
+```
+<template>
+  <div class="button">
+    <slot />
+  </div>
+</template>
+
+<style lang="stylus" scoped>
+.button
+  position relative
+  overflow hidden
+  display inline-block
+  padding .5rem 1rem
+  border .25rem solid #3eaf7c
+  cursor pointer
+  color #3eaf7c
+  font-family -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif
+  font-weight bold
+  text-transform uppercase
+  transition color .3s
+
+  &:before
+    content ''
+    position absolute
+    z-index -1
+    left -1rem
+    top 0
+    width 0
+    height 100%
+    transform skewX(-20deg)
+    transition width 1s, background .3s
+
+  &:hover
+    color #fff
+
+    &:before
+      width calc(100% + 2rem)
+      background #3eaf7c
+</style>
+```
+
+- Only the default slot is customizable (for now). It is available as a string.
+
+- Properties will be automatically parsed and will match type and default value accordingly. If you want to customize the property to limit the values to a limited set, you can use a special `enum` property and your whiteroom will display a `<select>` box instead of the corresponding input.
+
+```
+<template>
+  <div class="button" :class="{ [color]: true, disabled }">
+    <slot>{{ label }}</slot>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    label: {
+      type: String,
+      default: null,
+    },
+
+    color: {
+      type: String,
+      default: 'green',
+      enum: ['red', 'green', 'blue']
+    },
+
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+  },
+}
+</script>
+
+<style>...</style>
+```
+
+- If you wish to use injections, they are also parsed and available automatically.
+
+```
+<template>
+  <div class="button" :class="{ [color]: true, disabled }">
+    <slot>{{ $t(_button_label) }}</slot>
+  </div>
+</template>
+
+<script>
+export default {
+  inject: {
+    _button_label: {
+      default: 'missing-key'
+    },
+  },
+
+  props: {
+    color: {
+      type: String,
+      default: 'green',
+      enum: ['red', 'green', 'blue']
+    },
+
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+  },
+
+  methods: {
+    // supposely vue-i18n
+    $t(key) {
+      return `label_${key}`
+    },
+  },
+}
+</script>
+```
+
+- If you want to call methods on your experiment, all _public_ methods (non `$`, `_`) can be automatically called. It should be noted that no arguments can be passed.
+
+```
+<template>
+  <div class="button" :class="{ [color]: true, disabled }" @click="onclick">
+    <slot>{{ $t(_button_label) }}</slot>
+  </div>
+</template>
+
+<script>
+export default {
+  inject: {
+    _button_label {
+      default: 'missing-key'
+    },
+  },
+
+  props: {
+    color: {
+      type: String,
+      default: 'green',
+      enum: ['red', 'green', 'blue']
+    },
+
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+  },
+
+  methods: {
+    onclick() { window.alert('you clicked !') }
+  },
+}
+</script>
+```
+
+
 ### layouts
 
 The real component will be passed to you in a `proxy` prop, along with props. Injections are automatically resolved, so there's no so much other things to care about.
