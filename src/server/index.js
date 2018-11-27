@@ -5,5 +5,5 @@ import router from './router'
 new Vue({
   store,
   router,
-  render: h => h(Vue.component('router-view'))
+  render: h => h(Vue.component('RouterView'))
 }).$mount("#whiteroom")
