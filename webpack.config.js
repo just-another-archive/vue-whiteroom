@@ -7,6 +7,7 @@ const CleanTerminalPlugin = require('clean-terminal-webpack-plugin')
 
 module.exports = {
   mode: 'development',
+  node: { fs: 'empty' },
 
   resolveLoader: {
     modules: [ resolve(__dirname, './node_modules') ],
