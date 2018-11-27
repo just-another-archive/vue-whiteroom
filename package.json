@@ -1,6 +1,6 @@
 {
   "name": "vue-whiteroom",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "storybook copycat with Vue.js in mind",
   "main": "index.js",
   "scripts": {
