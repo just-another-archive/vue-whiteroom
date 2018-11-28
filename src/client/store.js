@@ -30,7 +30,15 @@ expose({
     store.commit('register', parameters)
 
     const { experiment, ...others } = parameters
-    const { props, inject, events, triggers } = experiment
+    let { props, inject, events, triggers, mixins } = experiment
+
+    // merge mixins for props
+    if (mixins)
+      props = mixins.reduce((props, mixin) => ({ ...props, ...mixin.props }), props)
+
+    // cannot clone validator functions
+    if (props)
+      Object.values(props).forEach(prop => delete prop.validator)
 
     // pass the command upstairs
     whiteroom.emit('register', {
