@@ -40,6 +40,14 @@ expose({
     if (props)
       Object.values(props).forEach(prop => delete prop.validator)
 
+    // use public methods as triggers
+    if (methods)
+      triggers = Object
+        .keys(methods)
+        .filter(method => !method.startsWith('$') && !method.startsWith('_'))
+        .map(method => ({ [method]: {} }))
+        .reduce((triggers, method) => ({ ...triggers, ...method }), triggers || {})
+
     // pass the command upstairs
     whiteroom.emit('register', {
       ...others,
