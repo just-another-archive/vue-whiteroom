@@ -30,7 +30,7 @@ expose({
     store.commit('register', parameters)
 
     const { experiment, ...others } = parameters
-    let { props, inject, events, triggers, mixins } = experiment
+    let { mixins, props, inject, events, triggers, methods } = experiment
 
     // merge mixins for props
     if (mixins)
