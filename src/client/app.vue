@@ -62,7 +62,14 @@ export default {
     if (!this.child)
       return h('div')
 
-    const props = Object.entries(this.child.props || {})
+    const mixins = this.child.mixins
+                 ? this.child.mixins
+                    .map(mixin => mixin.props)
+                    .filter(Boolean)
+                    .reduce((a, b) => ({ ...a, ...b }), {})
+                 : {}
+
+    const props = Object.entries({ ...this.child.props, ...mixins })
       .map(([prop, def]) => ({
         [prop]: cast(def, prop in this.query ? this.query[prop] : def.default)
       }))
