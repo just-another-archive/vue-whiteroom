@@ -13,6 +13,12 @@ module.exports = {
     modules: [ resolve(__dirname, './node_modules') ],
   },
 
+  resolve: {
+    alias: {
+      '@': resolve(process.env.PWD, './src'),
+    },
+  },
+
   entry: {
     'whiteroom' : resolve(__dirname, './src/server/'),
     'microscope' : resolve(__dirname, './src/client/'),
