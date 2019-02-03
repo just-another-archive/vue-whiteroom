@@ -10,6 +10,7 @@
 
     <panel class="right" closet>
       <settings />
+      <scale />
       <agents />
       <log slot="closet" />
     </panel>
@@ -22,11 +23,12 @@ import Frame from './modules/frame.vue'
 import Navigation from './modules/navigation.vue'
 import Panel from './modules/panel.vue'
 import Settings from './modules/settings.vue'
+import Scale from './modules/scale.vue'
 import Agents from './modules/agents.vue'
 import Log from './modules/log.vue'
 
 export default {
-  components: { Headline, Frame, Navigation, Panel, Settings, Agents, Log },
+  components: { Headline, Frame, Navigation, Panel, Settings, Scale, Agents, Log },
 
   mounted() {
     this.$refs.leftpanel.toggle = true;

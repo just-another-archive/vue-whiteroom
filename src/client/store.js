@@ -128,6 +128,12 @@ const store = new Vuex.Store({
         state.layout = state.layouts[name]
     },
 
+    scale: (state, fontsize) => {
+      document
+        .querySelectorAll('[scalable]')
+        .forEach(el => el.style.fontSize = fontsize !== 1 ? `${fontsize}em` : null)
+    },
+
     trigger(state, name = '') {
       state.trigger = name
     },

@@ -41,6 +41,8 @@ const store = new Vuex.Store({
     device: 'responsive',
 
     rotate: false,
+
+    fontsize: 1,
   },
 
   mutations: {
@@ -90,6 +92,10 @@ const store = new Vuex.Store({
 
     fullscreen(state, value) {
       state.fullscreen += value
+    },
+
+    scale(state, parameters) {
+      state.fontsize = parameters
     },
   },
 
