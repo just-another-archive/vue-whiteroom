@@ -83,8 +83,15 @@ export default {
 
     const proxy = { child: this.child, props, on }
 
+    let children = []
     const functions = compileToFunctions(`<div>${this.query.slot}</div>`)
-    const { children } = functions.staticRenderFns[0].call(this)
+
+    if (functions.staticRenderFns.length > 0)
+      children = functions.staticRenderFns[0].call(this).children
+    else if (functions.render)
+      children = functions.render.call(this).children
+    else
+      children = [this.query.slot]
 
     // force indirect update for injections
     if (this._provided === null) {
