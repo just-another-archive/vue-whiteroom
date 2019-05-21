@@ -13,6 +13,11 @@ import { mapState } from 'vuex'
 
 export default {
   props: {
+    name: {
+      type: String,
+      required: true,
+    },
+
     closet: {
       type: Boolean,
       default: false,
@@ -20,11 +25,12 @@ export default {
   },
 
   data() { return {
-    toggle: false,
+    toggle: window.localStorage.getItem(`panel#${this.name}`) === 'true',
   }; },
 
   watch: {
     toggle(val) {
+      window.localStorage.setItem(`panel#${this.name}`, val)
       this.$store.commit('fullscreen', val ? 1 : -1)
     },
   },

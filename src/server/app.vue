@@ -2,13 +2,13 @@
   <div class="whiteroom">
     <headline v-if="false" />
 
-    <panel ref="leftpanel" class="left">
+    <panel name="navigation" class="left">
       <navigation />
     </panel>
 
     <frame />
 
-    <panel class="right" closet>
+    <panel class="right" name="controls" closet>
       <settings />
       <scale />
       <agents />
@@ -29,10 +29,6 @@ import Log from './modules/log.vue'
 
 export default {
   components: { Headline, Frame, Navigation, Panel, Settings, Scale, Agents, Log },
-
-  mounted() {
-    this.$refs.leftpanel.toggle = true;
-  }
 }
 </script>
 
