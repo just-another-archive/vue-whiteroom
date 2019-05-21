@@ -33,6 +33,7 @@ export default {
     display block
     width 100%
     padding 1rem
+    font-size .8rem
     font-weight bold
     cursor pointer
 

@@ -136,7 +136,7 @@ export default {
     position relative
     z-index 2
     display flex
-    width 300px
+    min-width 20vw
     height 100%
     max-height 100vh
     overflow: scroll
