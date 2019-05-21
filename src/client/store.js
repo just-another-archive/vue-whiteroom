@@ -82,6 +82,11 @@ expose({
   }
 })
 
+// global scale helper function
+const scale = fontsize => document
+  .querySelectorAll('[scalable]')
+  .forEach(el => el.style.fontSize = fontsize !== 1 ? `${fontsize}em` : null)
+
 // store
 const store = new Vuex.Store({
   state: {
@@ -93,6 +98,7 @@ const store = new Vuex.Store({
     query: {},
 
     trigger: '',
+    fontsize: 1,
   },
 
   mutations: {
@@ -113,6 +119,8 @@ const store = new Vuex.Store({
       else {
         state.query = { ...state.query, ...query }
       }
+
+      scale(state.fontsize)
     },
 
     register(state, { path, experiment, ...parameters }) {
@@ -124,14 +132,15 @@ const store = new Vuex.Store({
     },
 
     layout(state, name = '') {
-      if (name in state.layouts)
+      if (name in state.layouts) {
         state.layout = state.layouts[name]
+        setTimeout(scale, 0, state.fontsize)
+      }
     },
 
     scale: (state, fontsize) => {
-      document
-        .querySelectorAll('[scalable]')
-        .forEach(el => el.style.fontSize = fontsize !== 1 ? `${fontsize}em` : null)
+      state.fontsize = fontsize
+      scale(state.fontsize)
     },
 
     trigger(state, name = '') {
