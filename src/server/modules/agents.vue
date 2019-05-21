@@ -2,7 +2,7 @@
   <div class="agents">
     <search v-model="filter" v-if="fields > 5" />
     <agent name="<slot />" description="default slot as text">
-      <text-agent :value="$route.query['slot']" @input="value => set('slot', value)" />
+      <text-agent multiline :value="$route.query['slot']" @input="value => set('slot', value)" />
     </agent>
     <h3 v-if="filtered_injects.length">injections</h3>
     <agent :key="`inject_${i}`" v-for="(inject, i) in filtered_injects"

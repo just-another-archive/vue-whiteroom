@@ -1,5 +1,6 @@
 <template>
-  <input type="text" :value="value" @input="e => $emit('input', e.target.value)" v-bind="$attrs" />
+  <input v-if="!multiline" type="text" :value="value" @input="e => $emit('input', e.target.value)" v-bind="$attrs" />
+  <textarea v-else :value="value" @input="e => $emit('input', e.target.value)" v-bind="$attrs" />
 </template>
 
 <script>
@@ -8,7 +9,21 @@ export default {
     value: {
       type: String,
       default: ''
-    }
+    },
+
+    multiline: {
+      type: Boolean,
+      default: false,
+    },
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+textarea
+  resize vertical
+  min-height calc(2em + 1px)
+  height calc(2em + 1px)
+  max-height 10em
+</style>
+
