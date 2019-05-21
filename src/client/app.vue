@@ -1,5 +1,6 @@
 <script>
 import Vue from 'vue'
+import { compileToFunctions } from 'vue-template-compiler'
 
 import { mapState } from 'vuex'
 import { cast } from './types'
@@ -82,6 +83,9 @@ export default {
 
     const proxy = { child: this.child, props, on }
 
+    const functions = compileToFunctions(`<div>${this.query.slot}</div>`)
+    const { children } = functions.staticRenderFns[0].call(this)
+
     // force indirect update for injections
     if (this._provided === null) {
       this.$nextTick(() => {
@@ -92,9 +96,9 @@ export default {
     }
 
     return h(this.layout, {
-      key: 'a',
+      key: this.path,
       props: { proxy },
-    }, this.query.slot || null)
+    }, children || null)
   }
 }
 </script>
