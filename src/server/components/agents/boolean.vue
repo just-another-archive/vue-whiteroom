@@ -1,12 +1,12 @@
 <template>
-  <input type="checkbox" :ckecked="value === 'true'" @click="e => $emit('input', e.target.checked.toString())" v-bind="$attrs" />
+  <input type="checkbox" :ckecked="value === true || value === 'true'" @click="e => $emit('input', e.target.checked.toString())" v-bind="$attrs" />
 </template>
 
 <script>
 export default {
   props: {
     value: {
-      type: String,
+      type: [String, Boolean],
       default: 'false'
     }
   }
