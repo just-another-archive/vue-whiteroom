@@ -20,6 +20,5 @@ export default {
   top 50%
   max-width 100vw
   max-height 100vh
-  overflow scroll
   transform translate(-50%, -50%)
 </style>
