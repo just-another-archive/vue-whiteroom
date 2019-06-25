@@ -1,6 +1,6 @@
 <template>
   <div class="whiteroom">
-    <headline v-if="false" />
+    <headline />
 
     <panel name="navigation" class="left">
       <navigation />
@@ -47,6 +47,6 @@ body
 .panel.left
   height auto
 
-.panel.right .content
+.panel.right
   width 20rem
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="headline" :class="toggle && fullscreen ? null : 'small'" @click="toggle = !toggle">
     <hgroup>
-      <h6>{{ title }}</h6>
+      <h6 v-if="title">{{ title }}</h6>
       <h1>{{ path }}</h1>
       <transition name="plode">
         <aside v-if="description">{{ description }}</aside>
@@ -49,13 +49,14 @@ export default {
 
 .headline
   position absolute
-  bottom 0
   left 0
-  padding 0 0 2rem 2rem
+  top 0
+  padding 2rem 0 0 2rem
   z-index 2
   transition padding .4s
 
-  &:before /* shadow */
+  /*
+  &:before // shadow
     content ''
     position absolute
     z-index 1
@@ -67,9 +68,10 @@ export default {
     pointer-events none
     transform rotate(2.5deg)
     transform-origin left bottom
+  */
 
   &.small
-    padding 0 0 1rem 1rem
+    padding 1rem 0 0 1rem
 
     hgroup
       transform scale(.5)
@@ -80,7 +82,7 @@ export default {
     display flex
     flex-direction column
     align-items flex-start
-    transform-origin left bottom
+    transform-origin left top
     transition transform .4s
 
   h6

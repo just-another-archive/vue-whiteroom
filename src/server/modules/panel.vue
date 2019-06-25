@@ -176,4 +176,7 @@ export default {
         background linear-gradient(to bottom, rgba(0,0,0,0.1) -50%, rgba(0,0,0,0) 100%)
         pointer-events none
 
+@media screen and (max-width: 768px)
+  .panel
+    min-width 80vw
 </style>

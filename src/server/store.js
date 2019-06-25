@@ -17,7 +17,7 @@ microscope.on(({ command, parameters }) => {
 // store
 const store = new Vuex.Store({
   state: {
-    title: 'vue-whiteroom',
+    title: '',
     fullscreen: 0,
 
     db: {},
