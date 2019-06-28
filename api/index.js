@@ -9,17 +9,16 @@ const client = (command, parameters, context = window) => {
     context.__whiteroom__[command](parameters)
 }
 
-export const inspect = (experiment, { path, group, ...parameters } = {}) => {
+export const inspect = (experiment, { path, ...parameters } = {}) => {
   if (experiment.__file && !path)
     path = experiment.__file.replace(/.vue$/, '')
 
-  if (!group)
-    group = ''
-
-  client('inspect', { path, experiment, group, ...parameters })
+  client('inspect', { path, experiment, ...parameters })
 }
+export const infos  = (parameters) => client('infos', parameters)
 
 export const device = (name, dimensions) => client('device', { name, dimensions })
+
 export const layout = (name, file) => client('layout', { name, file })
 
 export const log    = (...parameters) => client('log', parameters)

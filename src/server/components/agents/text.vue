@@ -22,8 +22,8 @@ export default {
 <style lang="stylus" scoped>
 textarea
   resize vertical
-  min-height calc(2em + 1px)
-  height calc(2em + 1px)
+  min-height calc(3em + 1px)
+  height calc(3em + 1px)
   max-height 10em
 </style>
 

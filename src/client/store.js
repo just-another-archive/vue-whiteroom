@@ -79,6 +79,10 @@ expose({
 
   log: parameters => {
     whiteroom.emit('log', parameters)
+  },
+
+  infos: parameters => {
+    whiteroom.emit('infos', parameters)
   }
 })
 

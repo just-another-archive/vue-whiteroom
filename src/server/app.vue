@@ -1,14 +1,15 @@
 <template>
   <div class="whiteroom">
-    <headline />
-
-    <panel name="navigation" class="left">
-      <navigation />
+    <panel class="left" closet>
+      <hgroup>
+        <img :src="poster" />
+      </hgroup>
+      <navigation slot="closet" />
     </panel>
 
     <frame />
 
-    <panel class="right" name="controls" closet>
+    <panel class="right" closet>
       <settings />
       <scale />
       <agents />
@@ -18,35 +19,69 @@
 </template>
 
 <script>
-import Headline from './modules/headline.vue'
-import Frame from './modules/frame.vue'
-import Navigation from './modules/navigation.vue'
-import Panel from './modules/panel.vue'
-import Settings from './modules/settings.vue'
-import Scale from './modules/scale.vue'
-import Agents from './modules/agents.vue'
-import Log from './modules/log.vue'
+import { mapState } from 'vuex'
+
+import Frame from './views/frame.vue'
+import Panel from './views/panel.vue'
+import Navigation from './views/navigation.vue'
+import Settings from './views/settings.vue'
+import Scale from './views/scale.vue'
+import Agents from './views/agents.vue'
+import Log from './views/log.vue'
 
 export default {
-  components: { Headline, Frame, Navigation, Panel, Settings, Scale, Agents, Log },
+  components: { Frame, Panel, Navigation, Settings, Scale, Agents, Log },
+
+  computed: {
+    ...mapState({
+      poster: state => state.poster,
+    }),
+  },
 }
 </script>
 
 <style lang="stylus">
+@import './vars.styl'
+
 body
-  background #f0f0f0
+  background-color darken($bg, 2.5%)
 
 .whiteroom
   position absolute
   overflow hidden
-  top 0
-  right 0
-  bottom 0
-  left 0
+  display flex
+  width 100vw
+  height 100vh
+  padding $dim
 
-.panel.left
-  height auto
+  /*.left
+    flex 0 0 auto
+    display flex
+    flex-direction column
+    min-width 18rem
+    width 20%
+    max-width 25rem
+    margin-left -1 * $dim
+    overflow scroll*/
 
-.panel.right
-  width 20rem
+  .left
+    hgroup
+      display flex
+      padding $dim 2 * $dim
+      align-items center
+
+      img
+        flex 1 1 auto
+        height 6 * $dim
+        object-fit contain
+        object-position center
+
+@media screen and (min-width: 768px)
+  .whiteroom
+    padding $dim 0
+
+  .right
+    min-width 20rem !important
+    width 25% !important
+    max-width 30rem !important
 </style>

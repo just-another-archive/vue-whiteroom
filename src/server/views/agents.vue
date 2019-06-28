@@ -1,17 +1,18 @@
 <template>
   <div class="agents">
     <search v-model="filter" v-if="fields > 5" />
+    <h3>slots</h3>
     <agent name="<slot />" description="default slot as text">
       <text-agent multiline :value="$route.query['slot']" @input="value => set('slot', value)" />
     </agent>
     <h3 v-if="filtered_injects.length">injections</h3>
     <agent :key="`inject_${i}`" v-for="(inject, i) in filtered_injects"
-           :name="inject.name" :description="inject.description">
+           class="inject" :name="inject.name" :description="inject.description">
       <text-agent :value="$route.query[inject.name]" @input="value => set(inject.name, value)" />
     </agent>
     <h3 v-if="filtered_props.length">props</h3>
     <agent :key="`agent_${i}`" v-for="(prop, i) in filtered_props"
-           :name="prop.name" :description="prop.description">
+           class="prop" :name="prop.name" :description="prop.description">
       <component
         :is="AGENTS[prop.type]"
         :value="$route.query[prop.name]"
@@ -20,7 +21,7 @@
     </agent>
     <h3 v-if="filtered_triggers.length">methods</h3>
     <agent :key="`trigger_${i}`" v-for="(trigger, i) in filtered_triggers"
-           :name="trigger.name" :description="trigger.description">
+           class="trigger" :name="trigger.name" :description="trigger.description">
       <trigger :trigger="trigger.name" />
     </agent>
   </div>
@@ -124,18 +125,20 @@ export default {
     &:first-child, &:last-child, & + hr
       display none
 
-  .agent, .inject, .trigger
-    padding 1rem
-    border-bottom 1px solid $bd
+  .agent, .inject
+    margin 0 1.5 * $dim 1.5 * $dim
+    padding-top 1.5 * $dim
 
   h3
     margin 0
-    padding .5rem .5rem 1rem
-    border-top .25rem solid $bd
-    border-bottom 1px solid $bd
+    padding 1.5 * $dim
+    border-top 1px solid $lightgray
     color $fg
-    font-size .75rem
-    font-weight bold
-    text-align right
+    font-size .8rem
 
+  h3 + .agent
+    padding-top 0
+
+    &:before
+      display none
 </style>

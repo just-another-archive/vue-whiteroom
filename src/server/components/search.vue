@@ -1,7 +1,7 @@
 <template>
   <div class="search">
     <fieldset>
-      <input ref="input" type="text" v-model="input" />
+      <input ref="input" type="text" placeholder="Search..." v-model="input" />
       <span @click="input = ''">⨯</span>
     </fieldset>
   </div>
@@ -34,8 +34,8 @@ export default {
     height 1.5rem
     margin 0
     padding 0
-    background #fff
-    border 1px solid #eee
+    border none
+    border-bottom 1px solid $lightgray
 
   input
     display block
@@ -45,10 +45,8 @@ export default {
     background transparent
     border none
     outline none
-    color #000
-    font-family inherit
-    font-size .5rem
-    letter-spacing .1rem
+    color $black
+    font-family system-ui
 
   span
     position absolute
@@ -61,7 +59,11 @@ export default {
     color $fg
     line-height 1.1rem
     text-align center
+    transition opacity .2s
 
     &:hover
-      background #eee
+      background $lightgray
+
+  input:placeholder-shown + span
+    opacity 0
 </style>

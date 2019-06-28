@@ -43,9 +43,11 @@ export default {
 .panel
   position absolute
   top 50%
+  min-width 80vw
   height 100vh
   z-index 3
-  box-shadow 0px 0 1rem -.5rem rgba(#000, 0.5)
+  background $white
+  box-shadow 0px 0 .25rem rgba(#000, .1)
   transition transform .4s, border-width .4s
 
   &.left
@@ -163,7 +165,6 @@ export default {
       height 30%
       border-top 1px solid $bd
       color $fg
-      background darken($vp, 3%)
 
       &:before
         content ''
@@ -176,7 +177,21 @@ export default {
         background linear-gradient(to bottom, rgba(0,0,0,0.1) -50%, rgba(0,0,0,0) 100%)
         pointer-events none
 
-@media screen and (max-width: 768px)
+@media screen and (min-width: 768px)
   .panel
-    min-width 80vw
+    position static
+    flex 0 0 auto
+    min-width 15rem
+    width 20%
+    max-width 25rem
+    transform none !important
+    border none !important
+    box-shadow none !important
+    background transparent !important
+
+    &.toggle
+      display none
+
+    aside:before
+      display none !important
 </style>

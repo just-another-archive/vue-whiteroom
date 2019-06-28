@@ -23,8 +23,8 @@ export default {
   transition background .2s
 
   &:hover
-    background rgba(#fff, .5) !important
+    background rgba($fg, .2) !important
 
   &:active
-    background rgba(#fff, .1) !important
+    background rgba($fg, .1) !important
 </style>

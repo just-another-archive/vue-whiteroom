@@ -20,7 +20,7 @@ export default {
     },
   },
 
-  data: () => ({ toggle: false })
+  data: () => ({ toggle: true })
 }
 </script>
 
@@ -28,26 +28,42 @@ export default {
 @import('../vars.styl')
 
 .group
+  transition margin-top .3s
+
   & > div
     position relative
     display block
     width 100%
-    padding 1rem
-    font-size .8rem
-    font-weight bold
+    padding $dim 4 * $dim $dim $dim
+    font-size .9rem
+    color $darkgray2
     cursor pointer
+    transition padding-bottom .3s
+
+    &:before
+      content ''
+      position absolute
+      top 0
+      left 25%
+      right 25%
+      height 1px
+      background $lightgray2
 
     &:after
       content ''
       position absolute
-      right 1rem
+      right 1.5 * $dim
       top 50%
       width .3rem
       height .3rem
-      border-top .2rem solid $fg
-      border-right .2rem solid $fg
-      transition transform .4s
+      border-top .1rem solid $fg
+      border-right .1rem solid $fg
+      transition top .3s, transform .3s
       transform translateY(-50%) rotate(45deg)
+
+  &.complete > div
+    padding-bottom .5 * $dim
+    font-weight bold
 
   &.complete > div:after
       transform translateY(-50%) rotate(135deg)
@@ -55,12 +71,18 @@ export default {
   section
     overflow hidden
 
+    &:after
+      content '_'
+      display block
+      color transparent
+
     &.expand-enter-active, &.expand-leave-active
-      transition opacity .4s, height .4s
+      transition opacity .3s, height .3s
 
     &.expand-enter, &.expand-leave-to
       opacity 0
 
-  & + .group
-    border-top 1px solid $bd
+  &:first-of-type > div:before
+    display none
+
 </style>

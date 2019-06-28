@@ -8,7 +8,7 @@ Vue.use(Vuex);
 const microscope = connect()
 
 microscope.on(({ command, parameters }) => {
-  const commands = ['register', 'devices', 'layouts', 'log']
+  const commands = ['register', 'devices', 'layouts', 'log', 'infos']
 
   if (commands.includes(command))
     store.commit(command, parameters)
@@ -17,7 +17,9 @@ microscope.on(({ command, parameters }) => {
 // store
 const store = new Vuex.Store({
   state: {
-    title: '',
+    title: 'vue-whiteroom',
+    poster: '',
+
     fullscreen: 0,
 
     db: {},
@@ -64,6 +66,14 @@ const store = new Vuex.Store({
 
         injects: (parameters.inject || {})
       } }
+    },
+
+    infos(state, parameters) {
+      if (!parameters)
+        return
+
+      state.title = parameters.title || ''
+      state.poster = parameters.poster || ''
     },
 
     log(state, parameters) {

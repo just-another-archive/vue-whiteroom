@@ -40,6 +40,7 @@ export default {
 .log
   display flex
   flex-direction column
+  border-top 1px solid $lightgray
 
   .header
     display flex
@@ -59,7 +60,7 @@ export default {
       cursor pointer
       background transparent
       transition background .2s, color .2s
-      color #333
+      color $darkgray2
       font-size .5rem
       line-height 1rem
 
@@ -78,7 +79,7 @@ export default {
     li
       padding .5rem 0
       border-bottom 1px solid $bd
-      color #888
+      color $lightgray
       font-family Menlo, monospace
       font-size .6rem
 

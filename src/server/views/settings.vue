@@ -23,6 +23,5 @@ export default {
   display flex
   flex-direction row
   justify-content flex-end
-  height 2rem
-  border-bottom 1px solid $bd
+  padding .5 * $dim
 </style>

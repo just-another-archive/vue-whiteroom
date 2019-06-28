@@ -2,12 +2,16 @@
   <div class="navigation">
     <search v-model="filter" />
 
-    <template v-for="(links, group, i) in groups">
-      <group :key="i" ref="groups" :name="group">
-        <router-link :key="link.path" v-for="link in links"
-                      class="link" :to="link.path">{{ link.name }}</router-link>
-      </group>
-    </template>
+    <div class="groups">
+      <template v-for="(links, group, i) in groups">
+        <group :key="i" ref="groups" :name="group">
+          <router-link :key="link.path" v-for="link in links"
+                        class="link" :to="link.path">
+                          <span>{{ link.name }}</span>
+          </router-link>
+        </group>
+      </template>
+    </div>
   </div>
 </template>
 
@@ -38,7 +42,9 @@ export default {
 
     filtered() {
       return this.filter.length
-           ? this.links.filter(link => link.name.indexOf(this.filter) !== -1)
+           ? this.links.filter(link => (
+              link.group.indexOf(this.filter) !== -1 || link.name.indexOf(this.filter) !== -1
+            ))
            : this.links
     },
 
@@ -56,31 +62,59 @@ export default {
 @import('../vars.styl')
 
 .navigation
+  display flex
+  flex-direction column
+
   .search
-    margin 1rem
+    flex 0 0 auto
+    margin 0 $dim $dim
+
+  .groups
+    flex 1 1 auto
+    max-height calc(100vh - 10rem)
+    overflow scroll
 
   .link
-    display block
     position relative
-    padding 1rem
-    border-top 1px solid lighten($bd, 5%)
+    display block
+    padding $dim $dim $dim 2 * $dim
     cursor pointer
-    color #bbb
+    color $darkgray2
     font-size .8rem
-    font-weight bold
     text-decoration none
     transition background .2s, color .2s, padding-left .2s
+
+    & span
+      position relative
+      z-index 1
+
+    &:before
+      z-index -1
+      content ''
+      position absolute
+      top 0
+      left 0
+      width 0
+      height 100%
+      background rgba($fg, .8)
+      transition width .3s
 
     &:first-child
       border-top-color $fg
 
     &:hover
-      background rgba(#000, .05)
-      padding-left 1.5rem
+      color $bg
+      padding-left 2.5 * $dim
+
+      &:before
+        width 50%
 
     &.router-link-active
       background $fg
       color $bg
-      padding-left 2rem
+      padding-left 3 * $dim
+
+      &:before
+        width 100%
 
 </style>

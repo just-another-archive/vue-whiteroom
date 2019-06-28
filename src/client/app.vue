@@ -105,7 +105,7 @@ export default {
     return h(this.layout, {
       key: this.path,
       props: { proxy },
-    }, children || null)
+    }, children || '')
   }
 }
 </script>

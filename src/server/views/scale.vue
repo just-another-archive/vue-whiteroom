@@ -15,6 +15,7 @@ import { mapState } from 'vuex'
 
 const MIN = .25
 const MAX = 2.5
+const STEP = .005
 
 export default {
   computed: {
@@ -29,8 +30,9 @@ export default {
 
   methods: {
     update(val) {
-      this.$store.commit('scale', MIN + val * (MAX - MIN))
-      this.$root.$emit('frame', 'scale', MIN + val * (MAX - MIN))
+      const clamp = MIN + val * (MAX - MIN)
+      this.$store.commit('scale', STEP * Math.round(clamp / STEP))
+      this.$root.$emit('frame', 'scale', STEP * Math.round(clamp / STEP))
     },
 
     reset() {
@@ -47,8 +49,8 @@ export default {
 .scale
   position relative
   width 100%
-  padding 1rem
-  border-bottom 1px solid #eaeaea
+  padding 2 * $dim 1.5 * $dim $dim
+  border-top 1px solid $lightgray
 
   .track, .thumb
     cursor pointer
@@ -58,7 +60,7 @@ export default {
     position relative
     width 100%
     height 1rem
-    background rgba(0,0,0,.1)
+    background $lightgray
     clip-path: polygon(0% 100%, 100% 0%, 100% 100%);
 
   .thumb
@@ -71,6 +73,6 @@ export default {
   .info
     margin .5rem 0 0
     font-size .5rem
-    color #888
+    color $darkgray2
     text-align right
 </style>
