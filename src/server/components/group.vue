@@ -34,7 +34,7 @@ export default {
     position relative
     display block
     width 100%
-    padding $dim 4 * $dim $dim $dim
+    padding $navdim 4 * $dim $navdim 1.5 * $dim
     font-size .9rem
     color $darkgray2
     cursor pointer
@@ -47,7 +47,8 @@ export default {
       left 25%
       right 25%
       height 1px
-      background $lightgray2
+      background transparent
+      transition background .3s
 
     &:after
       content ''
@@ -62,19 +63,18 @@ export default {
       transform translateY(-50%) rotate(45deg)
 
   &.complete > div
-    padding-bottom .5 * $dim
+    padding-bottom .5 * $navdim
     font-weight bold
+
+  &.complete > div:before
+    background $lightgray2
 
   &.complete > div:after
       transform translateY(-50%) rotate(135deg)
 
   section
     overflow hidden
-
-    &:after
-      content '_'
-      display block
-      color transparent
+    padding-bottom 2 * $dim
 
     &.expand-enter-active, &.expand-leave-active
       transition opacity .3s, height .3s
@@ -84,5 +84,4 @@ export default {
 
   &:first-of-type > div:before
     display none
-
 </style>

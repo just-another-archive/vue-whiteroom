@@ -44,7 +44,7 @@ export default {
 @import './vars.styl'
 
 body
-  background-color darken($bg, 2.5%)
+  background-color #f3f4f8
 
 .whiteroom
   position absolute

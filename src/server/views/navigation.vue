@@ -77,7 +77,7 @@ export default {
   .link
     position relative
     display block
-    padding $dim $dim $dim 2 * $dim
+    padding $navdim $dim $navdim 2 * $dim
     cursor pointer
     color $darkgray2
     font-size .8rem
@@ -107,7 +107,7 @@ export default {
       padding-left 2.5 * $dim
 
       &:before
-        width 50%
+        width 80%
 
     &.router-link-active
       background $fg

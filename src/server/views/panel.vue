@@ -182,12 +182,15 @@ export default {
     position static
     flex 0 0 auto
     min-width 15rem
-    width 20%
+    width 15%
     max-width 25rem
     transform none !important
     border none !important
     box-shadow none !important
     background transparent !important
+
+    & .content
+      min-width 0
 
     &.toggle
       display none
