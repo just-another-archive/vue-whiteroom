@@ -1,6 +1,6 @@
 <template>
   <div class="whiteroom">
-    <panel class="left" closet>
+    <panel class="left" name="left" closet>
       <hgroup>
         <img :src="poster" />
       </hgroup>
@@ -9,7 +9,7 @@
 
     <frame />
 
-    <panel class="right" closet>
+    <panel class="right" name="right" closet>
       <settings />
       <scale />
       <agents />
